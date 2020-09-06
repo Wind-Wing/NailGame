@@ -1,5 +1,7 @@
 from activityFramework import ActivityFramework
 from common import *
+from resources import Resources
+from shop import Shop
 
 
 class DrawActivity(ActivityFramework):
@@ -34,3 +36,16 @@ class DrawActivity(ActivityFramework):
         total_draw_voucher = res.drawVoucher
         res.drawVoucher = 0
         return res, total_draw_voucher
+
+
+if __name__ == "__main__":
+    res = Resources()
+
+    act = DrawActivity()
+    act.reset()
+    for i in range(ActivityDays):
+        res.add_daily_resources()
+        res = act.act_daily_special_package(res)
+        res = Shop.buy_one_day(res)
+    res = act.calc_act_coin(res)
+    res = act.calc_act_level(res)

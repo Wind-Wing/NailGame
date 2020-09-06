@@ -11,7 +11,7 @@ class ConsecrateActivity(ActivityFramework):
         self.wishCoinReward = [1, 1, 2, 2, 2, 0]
         self.baseActCoin = 400 * 4 + 1200
 
-        self.baseTime = Time(7, 0, 0) - Time(0, 10, 0)
+        self.baseTime = time(7, 0, 0) - time(0, 10, 0)
 
     def _get_act_type(self):
         return ActivityType.CONSECRATE
@@ -20,19 +20,19 @@ class ConsecrateActivity(ActivityFramework):
         if Common.is_enough(res.whiteTadpole, 1):
             res.whiteTadpole -= 1
             self.actCoin += 100
-            res.consecrateTime += Time(0, 0, 30)
+            res.consecrateTime += time(0, 0, 30)
         return res
 
     def _act_one_time_special_package(self, res):
         if Common.is_enough(res.whiteTadpole, 200):
             res.whiteTadpole -= 200
             self.actCoin += 100
-            res.consecrateTime += Time(0, 9, 0)
+            res.consecrateTime += time(0, 9, 0)
             res.drawVoucher += 1
         return res
 
     def _calc_act_point(self, res):
         total_hours = (self.baseTime + res.consecrateTime) / res.consecrateTimeSpeedUpRatio
         total_hours = math.floor(res.preAccumulateTime + total_hours)
-        res.consecrateTime = Time(0, 0, 0)
+        res.consecrateTime = time(0, 0, 0)
         return res, total_hours

@@ -22,7 +22,7 @@ class Shop:
 
         if Common.is_enough(res.whiteTadpole, 600):
             res.whiteTadpole -= 600
-            res.consecrateTime += Time(0, 10, 0)
+            res.consecrateTime += time(0, 10, 0)
         return res
 
     @staticmethod

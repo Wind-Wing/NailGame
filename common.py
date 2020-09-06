@@ -1,5 +1,4 @@
 from enum import Enum
-import math
 
 ActivityDays = 7
 
@@ -10,25 +9,16 @@ class Common:
         if own > need:
             return True
         else:
-            print("%s is not enough, own %d, need %d", name, own, need)
+            print("%s is not enough, own %d, need %d" % (name, own, need))
             return False
 
 
-class Time:
-    def __init__(self, d, h, m):
-        self.hours = 0
-        self.hours += d * 24
-        self.hours += h
-        self.hours += m / 60.0
-
-    def get_hours(self):
-        math.floor(self.hours)
-
-    def __add__(self, other):
-        return self.hours + other.hours
-
-    def __sub__(self, other):
-        return self.hours - other.hours
+def time(d, h, m):
+    hours = 0
+    hours += d * 24
+    hours += h
+    hours += m / 60.0
+    return hours
 
 
 class ActivityType(Enum):

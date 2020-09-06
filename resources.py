@@ -1,4 +1,4 @@
-from common import Time
+from common import time
 
 
 class Resources:
@@ -22,7 +22,7 @@ class Resources:
         # explore
         self.whiteTadpole += 200
         # daily task
-        self.consecrateTime += Time(0, 2, 0)
+        self.consecrateTime += time(0, 2, 0)
         self.drawVoucher += 1
         self.whiteTadpole += 280
 
