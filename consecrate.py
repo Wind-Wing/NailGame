@@ -31,12 +31,6 @@ class ConsecrateActivity(ActivityFramework):
             res.drawVoucher += 1
         return res
 
-        # TODO: special package
-        #     elif activity_type == ActivityType.WISH:
-        #         act_coin += 100
-        #         res.wishCoin += 1
-        #         res.whiteTadpole += 20
-
     def _calc_act_point(self, res):
         total_hours = (self.baseTime + res.consecrateTime) / res.consecrateTimeSpeedUpRatio
         total_hours = math.floor(res.preAccumulateTime + total_hours)
