@@ -22,4 +22,5 @@ if __name__ == "__main__":
         res = act.calc_act_coin(res)
         res = act.calc_act_level(res)
 
+# TODO: use DP to resolve feedback problem
 

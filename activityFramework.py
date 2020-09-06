@@ -24,7 +24,6 @@ class ActivityFramework:
 
     @abstractmethod
     def _calc_act_point(self, res): pass
-    # TODO: Add feedback loop
 
     def calc_act_coin(self, res):
         res = self._act_one_time_special_package(res)

@@ -27,6 +27,7 @@ class WishActivity(ActivityFramework):
     def _act_one_time_special_package(self, res):
         if Common.is_enough(res.whiteTadpole, 200):
             res.whiteTadpole -= 200
+            self.actCoin += 100
             res.wishCoin += 2
         return res
 
