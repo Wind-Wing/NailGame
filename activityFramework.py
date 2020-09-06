@@ -5,10 +5,10 @@ class ActivityFramework:
     def __init__(self):
         self.actPointRequirement = None
         self.actCoinReward = None
-        self.wishCoinReward = [0, 0, 0, 0, 0, 0]
-        self.drawVoucherReward = [0, 0, 0, 0, 0, 0]
-        self.consecrateTimeReward = [0, 0, 0, 0, 0, 0]
-        self.whiteTadpoleReward = [0, 0, 0, 0, 0, 0]
+        self.wishCoinReward = [0] * 10
+        self.drawVoucherReward = [0] * 10
+        self.consecrateTimeReward = [0] * 10
+        self.whiteTadpoleReward = [0] * 10
 
         self.baseActCoin = 0
         self.actCoinRequirement = [500, 1000, 1500, 3000, 5000]
@@ -24,7 +24,7 @@ class ActivityFramework:
 
     @abstractmethod
     def _calc_act_point(self, res): pass
-    # TODO: Add feedback loop,
+    # TODO: Add feedback loop
 
     def calc_act_coin(self, res):
         res = self._act_one_time_special_package(res)

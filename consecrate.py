@@ -12,19 +12,18 @@ class ConsecrateActivity(ActivityFramework):
         self.baseActCoin = 400 * 4 + 1200
 
         self.baseTime = Time(7, 0, 0) - Time(0, 10, 0)
-        self.actCoinRequirement = [500, 1000, 1500, 3000, 5000]
 
     def _get_act_type(self):
         return ActivityType.CONSECRATE
 
-    def _act_one_time_special_package(self, res):
+    def act_daily_special_package(self, res):
         if Common.is_enough(res.whiteTadpole, 1):
             res.whiteTadpole -= 1
             self.actCoin += 100
             res.consecrateTime += Time(0, 0, 30)
         return res
 
-    def act_daily_special_package(self, res):
+    def _act_one_time_special_package(self, res):
         if Common.is_enough(res.whiteTadpole, 200):
             res.whiteTadpole -= 200
             self.actCoin += 100
@@ -33,14 +32,6 @@ class ConsecrateActivity(ActivityFramework):
         return res
 
         # TODO: special package
-        # act_coin = 0
-        # if Common.is_enough(res.whiteTadpole, 1):
-        #     res.whiteTadpole -= 1
-        #
-        #     if activity_type == ActivityType.DRAW:
-        #         act_coin += 100
-        #         res.drawVoucher += 3
-        #         res.whiteTadpole += 20
         #     elif activity_type == ActivityType.WISH:
         #         act_coin += 100
         #         res.wishCoin += 1
