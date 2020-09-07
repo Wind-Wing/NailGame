@@ -57,6 +57,7 @@ class ActivityFramework:
         return sum(reward_list) * loop + sum(reward_list[:idx])
 
     def calc_act_level(self, res):
+        # TODO: Add level coin and voucher reward
         level = 0
         print("%s action coin: %d" % (self._get_act_type(), self.actCoin))
         for i in self.actCoinRequirement:

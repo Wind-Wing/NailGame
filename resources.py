@@ -15,7 +15,9 @@ class Resources:
         self.undergroundPoint = 0
 
     def add_daily_resources(self):
+        # digger
         self.undergroundPoint += 800. / 3.
+        self.whiteTadpole += 40
         # killer
         self.whiteTadpole += 243
         self.drawVoucher += 1
