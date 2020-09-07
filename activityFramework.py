@@ -29,7 +29,7 @@ class ActivityFramework:
         res = self._act_one_time_special_package(res)
         res, act_point = self._calc_act_point(res)
         self.actCoin += self.baseActCoin
-        print("%s action point: %d" % (self._get_act_type(), act_point))
+        print("%s action point: %d + %d" % (self._get_act_type(), act_point, self.baseActCoin))
 
         i = 0
         l = len(self.actPointRequirement)

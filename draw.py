@@ -40,8 +40,9 @@ class DrawActivity(ActivityFramework):
 
 if __name__ == "__main__":
     res = Resources()
-    res.whiteTadpole = 10000
+    res.whiteTadpole = 16000
     res.drawVoucher = 350
+    res.undergroundPoint = 600
 
     act = DrawActivity()
     act.reset()
