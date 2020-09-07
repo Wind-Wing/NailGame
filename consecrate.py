@@ -1,5 +1,8 @@
 from activityFramework import ActivityFramework
 from common import *
+import math
+from resources import Resources
+from shop import Shop
 
 
 class ConsecrateActivity(ActivityFramework):
@@ -36,3 +39,21 @@ class ConsecrateActivity(ActivityFramework):
         total_hours = math.floor(res.preAccumulateTime + total_hours)
         res.consecrateTime = time(0, 0, 0)
         return res, total_hours
+
+
+if __name__ == "__main__":
+    res = Resources()
+    res.whiteTadpole = 16000
+    res.consecrateTime = time(6, 0, 0)
+    res.consecrateTimeSpeedUpRatio = time(0, 6, 30) / time(0, 8, 0)
+    res.preAccumulateTime = time(8, 0, 0)
+    res.undergroundPoint = 600
+
+    act = ConsecrateActivity()
+    act.reset()
+    for i in range(ActivityDays):
+        res.add_daily_resources()
+        res = act.act_daily_special_package(res)
+        res = Shop.buy_one_day(res)
+    res = act.calc_act_coin(res)
+    res = act.calc_act_level(res)

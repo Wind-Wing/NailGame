@@ -1,4 +1,5 @@
 from abc import abstractmethod
+import math
 
 
 class ActivityFramework:
@@ -28,33 +29,32 @@ class ActivityFramework:
     def calc_act_coin(self, res):
         res = self._act_one_time_special_package(res)
         res, act_point = self._calc_act_point(res)
+        print("%s action point: %d" % (self._get_act_type(), act_point))
+
+        m = max(self.actPointRequirement)
+        loop = math.floor(act_point / m)
+        remain_point = act_point % m
+        idx = 0
+        if loop < self.maxLoop:
+            for i in self.actPointRequirement:
+                if i > remain_point:
+                    break
+                idx += 1
+
         self.actCoin += self.baseActCoin
-        print("%s action point: %d + %d" % (self._get_act_type(), act_point, self.baseActCoin))
+        self.actCoin += ActivityFramework._calc_reward(self.actCoinReward, loop, idx)
+        res.wishCoin += ActivityFramework._calc_reward(self.wishCoinReward, loop, idx)
+        res.drawVoucher += ActivityFramework._calc_reward(self.drawVoucherReward, loop, idx)
+        res.consecrateTime += ActivityFramework._calc_reward(self.consecrateTimeReward, loop, idx)
+        res.whiteTadpole += ActivityFramework._calc_reward(self.whiteTadpoleReward, loop, idx)
 
-        i = 0
-        l = len(self.actPointRequirement)
-        while True:
-            idx = i % l
-
-            req_act_target = self.actPointRequirement[idx]
-
-            if act_point < req_act_target:
-                break
-
-            if i >= l * 5:
-                break
-
-            act_point -= req_act_target
-            self.actCoin += self.actCoinReward[idx]
-            res.wishCoin += self.wishCoinReward[idx]
-            res.drawVoucher += self.drawVoucherReward[idx]
-            res.consecrateTime += self.consecrateTimeReward[idx]
-            res.whiteTadpole += self.whiteTadpoleReward[idx]
-            i += 1
-
-        print("%s action loop: %d - %d" % (self._get_act_type(), i / l, i % l))
+        print("%s action loop: %d - %d" % (self._get_act_type(), loop, idx))
 
         return res
+
+    @staticmethod
+    def _calc_reward(reward_list, loop, idx):
+        return sum(reward_list) * loop + sum(reward_list[:idx])
 
     def calc_act_level(self, res):
         level = 0
