@@ -26,3 +26,9 @@ class Resources:
         self.drawVoucher += 1
         self.whiteTadpole += 280
 
+    def show(self):
+        print("white tadpole: %d" % self.whiteTadpole)
+        print("draw voucher: %d" % self.drawVoucher)
+        print("wish coin: %d" % self.wishCoin)
+        print("consecrate time: %d" % self.consecrateTime)
+        print("underground point: %d" % self.undergroundPoint)

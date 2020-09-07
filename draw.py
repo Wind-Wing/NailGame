@@ -52,3 +52,4 @@ if __name__ == "__main__":
         res = Shop.buy_one_day(res)
     res = act.calc_act_coin(res)
     res = act.calc_act_level(res)
+    res.show()
