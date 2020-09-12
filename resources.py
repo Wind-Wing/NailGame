@@ -3,23 +3,26 @@ from common import time
 
 class Resources:
     def __init__(self):
+        # Act currency
         self.consecrateTime = 0
         self.wishCoin = 0
         self.drawVoucher = 0
-
+        # Currency
         self.whiteTadpole = 0
 
-        self.consecrateTimeSpeedUpRatio = 0.0
+        # Constant
+        self.consecrateTimeSpeedUpRatio = 1. - (7.8 + 2.8 + 3.6 + 2.8 + 5.) / 100.
+        # Act related
         self.preAccumulateTime = None
-
-        self.undergroundPoint = 0
+        self.actCoin = 0
 
     def add_daily_resources(self):
+        # tadpole pool
+        self.whiteTadpole += 200
         # digger
-        self.undergroundPoint += 800. / 3.
-        self.whiteTadpole += 40
+        self.whiteTadpole += 80
         # killer
-        self.whiteTadpole += 243
+        self.whiteTadpole += 280
         self.drawVoucher += 1
         # explore
         self.whiteTadpole += 200
@@ -33,4 +36,3 @@ class Resources:
         print("draw voucher: %d" % self.drawVoucher)
         print("wish coin: %d" % self.wishCoin)
         print("consecrate time: %d" % self.consecrateTime)
-        print("underground point: %d" % self.undergroundPoint)
