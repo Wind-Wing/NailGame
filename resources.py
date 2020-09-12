@@ -31,6 +31,14 @@ class Resources:
         self.drawVoucher += 1
         self.whiteTadpole += 280
 
+        # fighting shop
+        self.drawVoucher += 1. / 3.
+        # Museum shop
+        self.wishCoin += 1.
+        # Underground shop
+        self.wishCoin += 1
+        self.drawVoucher += 3
+
     def show(self):
         print("white tadpole: %d" % self.whiteTadpole)
         print("draw voucher: %d" % self.drawVoucher)
