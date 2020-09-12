@@ -1,5 +1,5 @@
 from interface.operational import Operational
-
+from common import Common
 
 class Shop(Operational):
     def operate(self, res, cmd):

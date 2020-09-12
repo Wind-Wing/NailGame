@@ -3,6 +3,7 @@ from activity.draw import DrawActivity
 from activity.wish import WishActivity
 from activity.consecrate import ConsecrateActivity
 from shop import Shop
+from common import *
 
 if __name__ == "__main__":
     res = Resources()
