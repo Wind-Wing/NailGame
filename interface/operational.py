@@ -13,4 +13,3 @@ class Operational:
     @abstractmethod
     def _get_operation_list(self):
         pass
-

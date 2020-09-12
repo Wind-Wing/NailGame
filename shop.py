@@ -1,5 +1,4 @@
-from common import *
-from operational import Operational
+from interface.operational import Operational
 
 
 class Shop(Operational):

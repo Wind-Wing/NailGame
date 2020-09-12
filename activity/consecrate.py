@@ -1,4 +1,4 @@
-from activityFramework import ActivityFramework
+from interface.activityFramework import ActivityFramework
 from common import *
 import math
 from resources import Resources
