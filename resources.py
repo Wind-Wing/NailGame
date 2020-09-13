@@ -41,6 +41,9 @@ class Resources:
         self.wishCoin += 1
         self.drawVoucher += 3
 
+        # Treasure chest
+        self.consecrateTime += time(0, 7, 0)
+
     def show(self):
         print("white tadpole: %d" % self.whiteTadpole)
         print("draw voucher: %d" % self.drawVoucher)

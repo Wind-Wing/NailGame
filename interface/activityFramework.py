@@ -58,6 +58,8 @@ class ActivityFramework(Operational):
 
     def _calc_act_level(self, res):
         # TODO: Add level coin and voucher reward
+        # TODO: Can get several reward at the same time
+        # TODO: Calculate final score
         level = 0
         print("%s action coin: %d" % (self._get_act_type(), res.actCoin))
         for i in self.actCoinRequirement:
