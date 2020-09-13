@@ -6,7 +6,7 @@ class WishActivity(ActivityFramework):
     def __init__(self):
         super().__init__()
         # Constant
-        self.actPointRequirement = [10, 20, 30, 40, 50, 60, 80]
+        self.actPointRequirement = [10, 10, 10, 10, 10, 10, 20]
         self.actCoinReward = [120, 120, 150, 150, 180, 180, 200]
         self.drawVoucherReward = [0, 5, 5, 5, 5, 0, 0]
         self.wishCoinReward = [0, 0, 0, 2, 0, 0, 0]
@@ -17,21 +17,21 @@ class WishActivity(ActivityFramework):
         return ActivityType.WISH
 
     def act_daily_special_package(self, res):
-        if Common.is_enough(res.whiteTadpole, 1):
-            res.whiteTadpole -= 1
-            self.actCoin += 100
-            res.wishCoin += 1
-            res.whiteTadpole += 20
+        res.whiteTadpole -= 1
+        res.actCoin += 100
+        res.wishCoin += 1
+        res.whiteTadpole += 20
         return res
 
     def _act_one_time_special_package(self, res):
-        if Common.is_enough(res.whiteTadpole, 200):
-            res.whiteTadpole -= 200
-            self.actCoin += 100
-            res.wishCoin += 2
+        res.whiteTadpole -= 200
+        res.actCoin += 100
+        res.wishCoin += 2
         return res
 
-    def _calc_act_point(self, res):
-        total_wish_coin = res.wishCoin
-        res.wishCoin = 0
-        return res, total_wish_coin
+    def _try_use_act_point(self, res, num):
+        is_enough = False
+        if res.wishCoin >= num:
+            res.wishCoin -= num
+            is_enough = True
+        return res, is_enough
