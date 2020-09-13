@@ -13,7 +13,6 @@ class Resources:
         # Constant
         self.consecrateTimeSpeedUpRatio = 1. - (7.8 + 2.8 + 3.6 + 2.8 + 5.) / 100.
         # Act related
-        self.preAccumulateTime = None
         self.actCoin = 0
 
     def reset(self):
