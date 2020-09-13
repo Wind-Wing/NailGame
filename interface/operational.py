@@ -10,6 +10,3 @@ class Operational:
     def get_cmd_length(self):
         pass
 
-    @abstractmethod
-    def _get_operation_list(self):
-        pass

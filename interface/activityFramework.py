@@ -1,70 +1,70 @@
 from abc import abstractmethod
+from interface.operational import Operational
 import math
 
 
-class ActivityFramework:
+class ActivityFramework(Operational):
     def __init__(self):
         self.actPointRequirement = None
         self.actCoinReward = None
-        self.wishCoinReward = [0] * 10
-        self.drawVoucherReward = [0] * 10
-        self.consecrateTimeReward = [0] * 10
-        self.whiteTadpoleReward = [0] * 10
+        self.wishCoinReward = [0] * 100
+        self.drawVoucherReward = [0] * 100
+        self.consecrateTimeReward = [0] * 100
+        self.whiteTadpoleReward = [0] * 100
 
         self.baseActCoin = 0
         self.actCoinRequirement = [500, 1000, 1500, 3000, 5000]
         self.maxLoop = 5
 
-        self.actCoin = 0
+    def operate(self, res, cmd):
+        res = self._act_one_time_special_package(res)
+        res = self._calc_act_coin(res, cmd)
+        res = self._calc_act_level(res)
+        return res
 
-    def reset(self):
-        self.actCoin = 0
+    def get_cmd_length(self):
+        return len(self.actPointRequirement) * self.maxLoop
 
     @abstractmethod
     def _get_act_type(self): pass
 
     @abstractmethod
-    def _calc_act_point(self, res): pass
+    def _try_use_act_point(self, res, num): pass
 
-    def calc_act_coin(self, res):
-        res = self._act_one_time_special_package(res)
-        res, act_point = self._calc_act_point(res)
-        print("%s action point: %d" % (self._get_act_type(), act_point))
-
-        m = max(self.actPointRequirement)
-        loop = math.floor(act_point / m)
-        remain_point = act_point % m
+    def _calc_act_coin(self, res, limit):
+        count = 0
         idx = 0
-        if loop < self.maxLoop:
-            for i in self.actPointRequirement:
-                if i > remain_point:
-                    break
-                idx += 1
+        l = len(self.actPointRequirement)
+        while count < limit:
+            idx = count % l
 
-        self.actCoin += self.baseActCoin
-        self.actCoin += ActivityFramework._calc_reward(self.actCoinReward, loop, idx)
-        res.wishCoin += ActivityFramework._calc_reward(self.wishCoinReward, loop, idx)
-        res.drawVoucher += ActivityFramework._calc_reward(self.drawVoucherReward, loop, idx)
-        res.consecrateTime += ActivityFramework._calc_reward(self.consecrateTimeReward, loop, idx)
-        res.whiteTadpole += ActivityFramework._calc_reward(self.whiteTadpoleReward, loop, idx)
+            req = self.actPointRequirement[idx]
+            res, is_enough = self._try_use_act_point(res, req)
+            if not is_enough:
+                break
 
-        print("%s action loop: %d - %d" % (self._get_act_type(), loop, idx))
+            res.actCoin += self.actCoinReward[idx]
+            res.wishCoin += self.wishCoinReward[idx]
+            res.drawVoucher += self.drawVoucherReward[idx]
+            res.consecrateTime += self.consecrateTimeReward[idx]
+            res.whiteTadpole += self.whiteTadpoleReward[idx]
+
+            count += 1
+
+        res.actCoin += self.baseActCoin
+        print("%s action loop: %d - %d" % (self._get_act_type(), math.floor(count / l), idx))
 
         return res
 
-    @staticmethod
-    def _calc_reward(reward_list, loop, idx):
-        return sum(reward_list) * loop + sum(reward_list[:idx])
-
-    def calc_act_level(self, res):
+    def _calc_act_level(self, res):
         # TODO: Add level coin and voucher reward
         level = 0
-        print("%s action coin: %d" % (self._get_act_type(), self.actCoin))
+        print("%s action coin: %d" % (self._get_act_type(), res.actCoin))
         for i in self.actCoinRequirement:
-            if self.actCoin < i:
+            if res.actCoin < i:
                 break
             level += 1
-            self.actCoin -= i
+            res.actCoin -= i
         print("%s reward: level %d" % (self._get_act_type(), level))
         return res
 

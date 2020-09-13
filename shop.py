@@ -1,5 +1,6 @@
 from interface.operational import Operational
-from common import Common
+from common import *
+
 
 class Shop(Operational):
     def operate(self, res, cmd):
