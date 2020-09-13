@@ -16,6 +16,9 @@ class Resources:
         self.preAccumulateTime = None
         self.actCoin = 0
 
+    def reset(self):
+        self.actCoin = 0
+
     def add_daily_resources(self):
         # tadpole pool
         self.whiteTadpole += 200
